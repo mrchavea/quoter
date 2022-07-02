@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 
 export default function Form() {
   return (
-    <div className="container">
+    <>
       <h1 className={styles.title}>
         Form{' '}
         <Link href="/">
@@ -28,6 +28,6 @@ export default function Form() {
 
         <button type="submit">Submit</button>
       </form>
-    </div>
+    </>
   )
 }

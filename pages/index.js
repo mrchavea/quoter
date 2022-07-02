@@ -5,14 +5,13 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
+    <>
+<Head>
         <title>Next.js forms</title>
         <meta name="description" content="Learn forms with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
+      
         <h1 className={styles.title}>
           Forms with <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -24,7 +23,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <Link href="/js-form">
+          <Link href="/pregunta1">
             <a className={styles.card}>
               <h2>Form with JavaScript &rarr;</h2>
               <p>Learn to handle forms with JavaScript in Next.js.</p>
@@ -38,7 +37,6 @@ export default function Home() {
             </a>
           </Link>
         </div>
-      </main>
 
       <footer className={styles.footer}>
         <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
@@ -48,6 +46,6 @@ export default function Home() {
           </span>
         </a>
       </footer>
-    </div>
+    </>
   )
 }
