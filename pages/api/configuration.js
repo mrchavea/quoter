@@ -28,7 +28,7 @@ const configurationJson = {
     logo: true
 }
 
-export default (req, res) => {
+export default function handleRequest (req, res) {
     const {id} = req.query;
     console.log(id);
     res.status = 200;

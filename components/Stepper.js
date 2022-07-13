@@ -5,15 +5,14 @@ import {useStepContext} from '../context/stepContext';
 import React from 'react'
 
 export function Stepper() {
-    const { step, setStep } = useStepContext();
+    //const { state : {step}} = useStepContext();
+    const { state : {step}, dispatch} = useStepContext();
 
     const STEPS = {
         0: "Vehículo 🚗",
         1: "Tu seguro ⚖️",
         2: "Tu presupuesto 👍"
     }
-    console.log("step en steppet",step)
-
     
     return (
         <>

@@ -1,7 +1,7 @@
 import useNextStep from 'hooks/useNextStep'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 import {useStepContext} from '../context/stepContext';
 import {useLanguageContext} from "../context/languageContext"
@@ -11,10 +11,11 @@ import styles from '../styles/Home.module.css'
 import {motion} from 'framer-motion'
 
 export default function PageWithJSbasedForm({configurationJson}) {
-  console.log("conf",configurationJson)
   const router = useRouter()
 
-  const { step, setStep } = useStepContext();
+  const { state, dispatch} = useStepContext()
+  const {step} = state
+  console.log("STEPCONTEXT EN PREGUNTA",step, dispatch)
   const {language} = useLanguageContext();
 
   const {title, numero} = configurationJson.flow.questions[step]
@@ -24,8 +25,12 @@ export default function PageWithJSbasedForm({configurationJson}) {
     enter: { opacity: 1, x: 0, y: 0 },
   }
 
-  useEffect(()=>{
-    console.log("step en useEffect de pregunta", step)
+  const stepForward = () =>{
+    dispatch({type : 'STEP_FORWARD'})
+  }
+
+  useLayoutEffect(()=>{
+    if(step == 2) router.push("/precio")
   },[step])
 
   // Handle the submit event on form submit.
@@ -58,12 +63,9 @@ export default function PageWithJSbasedForm({configurationJson}) {
     // Get the response data from server as JSON.
     // If server returns the name submitted, that means the form works.
     const result = await response.json()
-    const nextStep = useNextStep(step)
-    if(nextStep == 2){
-      router.push("/precio")
-    }
-    else setStep(nextStep)
+    stepForward();
   }
+
   return (
 
         <motion.div id="main-content"

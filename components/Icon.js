@@ -1,5 +1,8 @@
+import Image from "next/image"
+
 export default function Icon ({height}){
+    console.log("HEIGHT ERR", height)
     return(
-        <img src='/driverly.jpg' height={height} width="auto"></img>
+        <Image src='/driverly.jpg' alt="Logotipo" height={height} width={height} layout='fixed'/>
     )
 }

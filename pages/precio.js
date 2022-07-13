@@ -1,14 +1,25 @@
 import useNextStep from 'hooks/useNextStep'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+
 import {useStepContext} from '../context/stepContext';
+import {useConfigContext} from "../context/configContext"
+import {useLanguageContext} from "../context/languageContext"
+
 import styles from '../styles/Home.module.css'
 import {motion} from 'framer-motion'
 
-export default function PageWithJSbasedForm({prize, configurationJson}) {
+export default function Precio({prize}) {
 
-  const { step, setStep } = useStepContext();
-  const {title, numero} = configurationJson.flow.questions[step]
+  const {config} = useConfigContext();
+  const {language} = useLanguageContext();
+
+  console.log("CONFIG EN PRIZE", config)
+  const { state, dispatch} = useStepContext()
+  const {step} = state
+
+  const {title, numero} = config.flow.questions[step]
+
   const variants = {
     hidden: { opacity: 0, x: -200, y: 0 },
     enter: { opacity: 1, x: 0, y: 0 },
@@ -68,7 +79,7 @@ export default function PageWithJSbasedForm({prize, configurationJson}) {
                 "
           >
             <h1 className={styles.title}>
-              {title}{' '}
+            {title[language.name]}{' '}
               <Link href="/">
                 <a>{numero}</a>
               </Link>{' '}
@@ -105,8 +116,6 @@ export default function PageWithJSbasedForm({prize, configurationJson}) {
 }
 
 
-PageWithJSbasedForm.getInitialProps = async () => {
-  const {prize} = await fetch("http://localhost:3000/api/prize?id=1").then(res => res.json())
-  const {configurationJson} = await fetch("http://localhost:3000/api/configuration?id=1").then(res => res.json())
-  return {prize, configurationJson};
+Precio.getInitialProps = async () => {
+  return await fetch("http://localhost:3000/api/prize?id=1").then(res => res.json())
 }
