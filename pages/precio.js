@@ -59,8 +59,6 @@ export default function Precio({prize}) {
     // Get the response data from server as JSON.
     // If server returns the name submitted, that means the form works.
     const result = await response.json()
-    const nextStep = useNextStep(step)
-    setStep(nextStep)
   }
 
 
