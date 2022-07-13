@@ -48,8 +48,11 @@ export default function PageWithJSbasedForm({prize, configurationJson}) {
     // Get the response data from server as JSON.
     // If server returns the name submitted, that means the form works.
     const result = await response.json()
-    setStep((prevState)=>useNextStep(prevState))
+    const nextStep = useNextStep(step)
+    setStep(nextStep)
   }
+
+
   return (
         <>
           <motion.div id="main-content"

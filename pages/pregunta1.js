@@ -62,7 +62,7 @@ export default function PageWithJSbasedForm({configurationJson}) {
     if(nextStep == 2){
       router.push("/precio")
     }
-    else setStep(prevStep => useNextStep(prevStep))
+    else setStep(nextStep)
   }
   return (
 
