@@ -2,20 +2,30 @@ const configurationJson = {
     flow: {
         questions:[
             {
-                title : "¿Recuerdas tu matrícula? 🚗",
+                title : {
+                    "Español" : "¿Recuerdas tu matrícula? 🚗",
+                    "English" : "¿Do you remember car license plate? 🚗"
+                },
                 numero: 1
             },
             {
-                title : "Pregunta número 2",
+                title : {
+                    "Español" : "Pregunta 2",
+                    "English" : "Question 2"
+                },                
                 numero: 2
             },
             {
-                title : "Este es tu presupuesto 💙",
+                title : {
+                    "Español" : "Este es tu presupuesto 💙",
+                    "English" : "This is your price 💙"
+                }, 
                 numero: 3,
                 custom: "Precio"
             }
         ]
-    }
+    },
+    logo: true
 }
 
 export default (req, res) => {

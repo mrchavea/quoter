@@ -2,7 +2,11 @@ import useNextStep from 'hooks/useNextStep'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+
 import {useStepContext} from '../context/stepContext';
+import {useLanguageContext} from "../context/languageContext"
+import {useConfigContext} from "../context/configContext"
+
 import styles from '../styles/Home.module.css'
 import {motion} from 'framer-motion'
 
@@ -11,7 +15,10 @@ export default function PageWithJSbasedForm({configurationJson}) {
   const router = useRouter()
 
   const { step, setStep } = useStepContext();
+  const {language} = useLanguageContext();
+
   const {title, numero} = configurationJson.flow.questions[step]
+  
   const variants = {
     hidden: { opacity: 0, x: -200, y: 0 },
     enter: { opacity: 1, x: 0, y: 0 },
@@ -60,7 +67,7 @@ export default function PageWithJSbasedForm({configurationJson}) {
   return (
 
         <motion.div id="main-content"
-        key={title}
+        key={title[language.name]}
         initial="hidden"
         animate="enter"
         variants={variants}
@@ -72,7 +79,7 @@ export default function PageWithJSbasedForm({configurationJson}) {
             "
         >
           <h1 className={styles.title}>
-            {title}{' '}
+            {title[language.name]}{' '}
             <Link href="/">
               <a>{numero}</a>
             </Link>{' '}

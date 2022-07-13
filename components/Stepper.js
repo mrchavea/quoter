@@ -1,9 +1,10 @@
+import nextConfig from 'next.config';
 import { useEffect } from 'react';
 import Icon from '../components/Icon'
 import {useStepContext} from '../context/stepContext';
+import React from 'react'
 
-export default function Stepper(props) {
-    const {height} = props;
+export function Stepper() {
     const { step, setStep } = useStepContext();
 
     const STEPS = {
@@ -16,26 +17,12 @@ export default function Stepper(props) {
     
     return (
         <>
-        <nav>
-            <div id="icon">
-                <Icon height={height}/>
-            </div>
             <section>
                 <h1>{STEPS[step]}</h1>
                 <span>{step+1}</span> 
-            </section>
-            <div></div>     
-        </nav>
-                      
-        <style jsx>{`
+            </section> 
 
-            nav{
-                min-height: ${height}px;
-                height: ${height}px;
-                width: 100%;
-                display:flex;
-                text-align:center;
-            }
+        <style jsx>{`
 
             span{
 
@@ -51,18 +38,10 @@ export default function Stepper(props) {
                 justify-self: center;
             }
 
-            div{
-                width:${height+15}px;
-                height:100%;
-            }
-
-            #icon{
-                margin-left:15px;
-            }
         `}
         </style>
         </>
     )
-
-
 }
+
+export default React.memo(Stepper)
