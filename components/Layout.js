@@ -10,7 +10,7 @@ export default function Layout ( {navHeight, children}) {
       
     return (
         <>
-            <div>
+            <div id="Layout" className="lg:columns-12 sm:columns-4 flex flex-col md:justify-center items-center lg:pb-[10vh]">
                 {children}
             </div>
             
@@ -19,11 +19,6 @@ export default function Layout ( {navHeight, children}) {
 
             div {
                 min-height:  calc(100vh - ${navHeight}px);
-                padding: 0 0.5rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
                 height:  calc(100vh - ${navHeight}px);
             }
 

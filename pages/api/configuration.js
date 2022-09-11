@@ -3,22 +3,32 @@ const configurationJson = {
         questions:[
             {
                 title : {
-                    "Español" : "¿Recuerdas tu matrícula? 🚗",
-                    "English" : "¿Do you remember car license plate? 🚗"
+                    Español : "¿Recuerdas tu matrícula? 🚗",
+                    English : "¿Do you remember car license plate? 🚗"
                 },
-                numero: 1
+                numero: 1,
+                variableName: "license-plate",
+                label : {
+                    Español : "Matrícula",
+                    English : "License plate"
+                }
             },
             {
                 title : {
-                    "Español" : "Pregunta 2",
-                    "English" : "Question 2"
+                    Español : "Pregunta 2",
+                    English : "Question 2"
                 },                
-                numero: 2
+                numero: 2,
+                variableName: "second-variable",
+                label : {
+                    Español : "Pregunta",
+                    English : "Question"
+                }
             },
             {
                 title : {
-                    "Español" : "Este es tu presupuesto 💙",
-                    "English" : "This is your price 💙"
+                    Español : "Este es tu presupuesto 💙",
+                    English : "This is your price 💙"
                 }, 
                 numero: 3,
                 custom: "Precio"

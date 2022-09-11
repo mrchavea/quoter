@@ -1,4 +1,14 @@
-html,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.root,
+#root,
+#docs-root {
+  --nav-height: 152px;
+}
+
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -69,4 +79,4 @@ button:hover {
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
+} */

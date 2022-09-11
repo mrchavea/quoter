@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }) {
           <StepContextContextProvider>
 
             <Header height={NAV_HEIGHT}/>
-            
+
             <Layout navHeight = {NAV_HEIGHT}>
               <Component  {...pageProps} />
             </Layout>

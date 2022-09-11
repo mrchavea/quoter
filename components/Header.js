@@ -6,13 +6,13 @@ import {useConfigContext} from '../context/configContext'
 
 export default function Header ({height}) {
 
-    const {config} = useConfigContext();
-    console.log("CONF en header", config)
+    const {configurationJson} = useConfigContext();
+    console.log("CONF en header", configurationJson)
 
     return (
         <>
             <nav>           
-                {config.logo ?
+                {configurationJson && configurationJson.logo ?
                 
                     <div id="icon">
                         <Icon height={height}/>
@@ -49,6 +49,7 @@ export default function Header ({height}) {
                 }
 
                 #icon{
+                    margin-top: 35px;
                     margin-left:15px;
                 }
         `}

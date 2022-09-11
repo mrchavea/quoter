@@ -23,7 +23,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <Link href="/pregunta1">
+          <Link href="/dynamicQuestion">
             <a className={styles.card}>
               <h2>Form with JavaScript &rarr;</h2>
               <p>Learn to handle forms with JavaScript in Next.js.</p>

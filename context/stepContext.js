@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
     case 'STEP_BACK':
       return {
         ...state,
-        step: state.step -1
+        step: state.step - 1 < 0 ? 0 : state.step - 1
       }
     default:
       return state;
