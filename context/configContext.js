@@ -17,7 +17,7 @@ export const ConfigContextContextProvider = ({ children }) => {
 
   //ComponentDidMount
   React.useEffect( async () => {   
-    const {configurationJson} = await fetch("http://localhost:3000/api/configuration?id=1")
+    const {configurationJson} = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/configuration?id=1`)
     .then(res => res.json())
     .catch(err => setLoadingState(states.ERROR)); 
     setConfigurationJson (prevConfig => {
