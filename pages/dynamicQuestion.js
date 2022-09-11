@@ -90,7 +90,7 @@ export default function DynamicQuestion() {
     <>
 
           <motion.div id="main-content"
-          key={step}
+          key={language && question?.label ? question?.data?.label[language?.name] : step}
           initial="hidden"
           animate="enter"
           variants={variants}
