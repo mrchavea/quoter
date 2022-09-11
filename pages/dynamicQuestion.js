@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import {useStepContext} from '../context/stepContext';
 import {useLanguageContext} from "../context/languageContext"
@@ -10,23 +10,41 @@ import {motion} from 'framer-motion'
 import Title from '../components/Title'
 import Button from 'components/Button';
 import ButtonSecondary from 'components/ButtonSecondary';
-import SkeletonTitle from '../components/Skeleton/SkeletonTitle'
 import TextInput from '../components/Inputs/TextInput'
 
 export default function DynamicQuestion() {
   const router = useRouter()
 
-  const [isLoading,setIsLoading] = useState(true);
+  // const [isLoading,setIsLoading] = useState(true);
   const [question, setQuestion] = useState("");
   
   const { state : {step}, dispatch} = useStepContext();
   const {language} = useLanguageContext();
-  const {configurationJson} = useConfigContext();
+  const {configurationJson, loadingState, setLoadingState, states} = useConfigContext();
 
   
   const variants = {
     hidden: { opacity: 0, x: -200, y: 0 },
     enter: { opacity: 1, x: 0, y: 0 },
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const data = {
+      [question?.variableName]: event.target[question.variableName]?.value,
+    }
+    const JSONdata = JSON.stringify(data)
+    const response = await fetch('/api/form', {
+      body: JSONdata,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    })
+    const result = await response.json()
+    console.log("RES", result)
+    stepForward();
   }
 
   const stepForward = () =>{
@@ -37,60 +55,42 @@ export default function DynamicQuestion() {
     dispatch({type : 'STEP_BACK'})
   }
 
-  useEffect( ()=>{
-    console.table("CONF y STEP", configurationJson, step)
-    if(configurationJson){
+  const SetData = useCallback(() =>{
+
+    if(configurationJson && loadingState === states.INITIALIZED){
       setQuestion(configurationJson.flow.questions[step])
-      if(isLoading) setIsLoading(false);
-    } 
-  },[configurationJson,step])
+    }
+  }, [step])
 
-  // Handle the submit event on form submit.
-  const handleSubmit = async (event) => {
-    // Stop the form from submitting and refreshing the page.
-    event.preventDefault()
-
-    console.log("FORM", event)
-    console.log('first 👉️',question);
-    // Get data from the form.
-    const data = {
-      [question?.variableName]: event.target[question.variableName].value,
+  const LoadInitialData = useCallback(() =>{
+    
+    if(configurationJson && loadingState === states.LOADED){
+      setQuestion(configurationJson.flow.questions[step])
+      setLoadingState(states.INITIALIZED)
     }
 
-    //useLogicValidator(data,step);
+  },[configurationJson])
 
-    const JSONdata = JSON.stringify(data)
+  useEffect( ()=>{
+    console.table("DYNAMIC USE EFFECT", configurationJson, step, loadingState, states)
 
-    // Send the form data to our API and get a response.
-    const response = await fetch('/api/form', {
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
+    SetData();
 
-      // Tell the server we're sending JSON.
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // The method is POST because we are sending data.
-      method: 'POST',
-    })
+  },[SetData])
 
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json()
-    stepForward();
-  }
+  useEffect( ()=>{
+    console.table("DYNAMIC USE EFFECT INITIAL", configurationJson, step, loadingState, states)
+
+    LoadInitialData();
+
+  },[LoadInitialData])
 
   return (
 
     <>
-        {isLoading ? 
-        
-          <SkeletonTitle/> 
-
-          :
 
           <motion.div id="main-content"
-          key={question?.title[language.name]}
+          key={step}
           initial="hidden"
           animate="enter"
           variants={variants}
@@ -99,11 +99,11 @@ export default function DynamicQuestion() {
             
             <div className="grid gap-8">
 
-              <Title title={question?.title[language.name]}/>       
+              <Title isLoading={loadingState!==states.INITIALIZED} data={question} language={language}/>       
 
               <form onSubmit={handleSubmit}>
 
-                  <TextInput id={question.variableName} label={question.label[language.name]}/>
+                  <TextInput isLoading={loadingState!==states.INITIALIZED} data={question} language={language}/>
 
                   <div className="flex flex-row justify-center pt-3">
                     <ButtonSecondary text={"Atrás"} onClick={stepBack}/>
@@ -115,7 +115,6 @@ export default function DynamicQuestion() {
             </div>
 
           </motion.div>        
-        }
     </>     
   )
 }
