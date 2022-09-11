@@ -33,7 +33,6 @@ export const StepContextContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const router = useRouter();
   //const [state2, setStep2] = useState(0);
-  console.log("state en context",state)
   console.log("Probando ENV: NEXT_PUBLIC_VERCEL_URL", process.env.NEXT_PUBLIC_VERCEL_URL)
   console.log("Probando ENV: VERCEL_URL", process.env.VERCEL_URL)
 

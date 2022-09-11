@@ -3,13 +3,9 @@ import {useLanguageContext} from "../context/languageContext"
 import React from "react";
 
 export function LanguageSwitch ({height}) {
-
-    console.log("LANG2");
-
     const {language, setLanguage, LANGUAGES} = useLanguageContext();
 
     const handleClick = (newLanguage) => {
-        console.log("language change to",language)
         setLanguage(prevLanguage => newLanguage)
     }
 

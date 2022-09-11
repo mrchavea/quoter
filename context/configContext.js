@@ -17,14 +17,13 @@ export const ConfigContextContextProvider = ({ children }) => {
 
   //ComponentDidMount
   React.useEffect( async () => {   
-    const {configurationJson} = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/configuration?id=1`)
+    const {configurationJson} = await fetch(`/api/configuration?id=1`)
     .then(res => res.json())
     .catch(err => setLoadingState(states.ERROR)); 
     setConfigurationJson (prevConfig => {
       if(configurationJson) setLoadingState(states.LOADED)
       return configurationJson;
     });
-    console.log("config en configcontext useEffect",configurationJson, loadingState)
   }, []);
 
   //

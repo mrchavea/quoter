@@ -7,7 +7,6 @@ import {useConfigContext} from '../context/configContext'
 export default function Header ({height}) {
 
     const {configurationJson} = useConfigContext();
-    console.log("CONF en header", configurationJson)
 
     return (
         <>

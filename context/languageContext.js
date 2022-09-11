@@ -22,7 +22,6 @@ export const LanguageContextContextProvider = ({ children }) => {
   //ComponentDidMouunt
   React.useEffect(() => {   
     setLanguage (prevLanguage => language);
-    console.log("LANG en context", language)
 }, [language]);
 
   //
