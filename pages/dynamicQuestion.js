@@ -14,13 +14,10 @@ import TextInput from '../components/Inputs/TextInput'
 
 export default function DynamicQuestion() {
   const router = useRouter()
-
-  // const [isLoading,setIsLoading] = useState(true);
-  const [question, setQuestion] = useState("");
   
   const { state : {step}, dispatch} = useStepContext();
   const {language} = useLanguageContext();
-  const {data, loadingState, initializeData, states} = useConfigContext();
+  const {data, loadingState, states} = useConfigContext();
 
   
   const variants = {
@@ -30,21 +27,22 @@ export default function DynamicQuestion() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    const data = {
-      [question?.variableName]: event.target[question.variableName]?.value,
-    }
-    const JSONdata = JSON.stringify(data)
-    const response = await fetch('/api/form', {
-      body: JSONdata,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
-    const result = await response.json()
-    console.log("RES", result)
-    stepForward();
+    if(loadingState === states.LOADED){
+      const inputData = {
+        [data.configurationJson.flow.questions[step].variableName]: event.target[data.configurationJson.flow.questions[step].variableName].value,
+      }
+      const JSONdata = JSON.stringify(inputData)
+      const response = await fetch('/api/form', {
+        body: JSONdata,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      })
+      const result = await response.json()
+      console.log("RES", result)
+      stepForward();
+    }  
   }
 
   const stepForward = () =>{
@@ -69,11 +67,11 @@ export default function DynamicQuestion() {
             
             <div className="grid gap-8">
 
-              <Title isLoading={loadingState!==states.LOADED} data={data?.configurationJson.flow.questions[step]} language={language}/>       
+              <Title isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>       
 
               <form onSubmit={handleSubmit}>
 
-                  <TextInput isLoading={loadingState!==states.LOADED} data={data?.configurationJson.flow.questions[step]} language={language}/>
+                  <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
 
                   <div className="flex flex-row justify-center pt-3">
                     <ButtonSecondary text={"Atrás"} onClick={stepBack}/>
