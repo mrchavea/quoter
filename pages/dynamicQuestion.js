@@ -20,7 +20,7 @@ export default function DynamicQuestion() {
   
   const { state : {step}, dispatch} = useStepContext();
   const {language} = useLanguageContext();
-  const {configurationJson, loadingState, setLoadingState, states} = useConfigContext();
+  const {data, loadingState, initializeData, states} = useConfigContext();
 
   
   const variants = {
@@ -55,42 +55,12 @@ export default function DynamicQuestion() {
     dispatch({type : 'STEP_BACK'})
   }
 
-  const SetData = useCallback(() =>{
-
-    if(configurationJson && loadingState === states.INITIALIZED){
-      setQuestion(configurationJson.flow.questions[step])
-    }
-  }, [step])
-
-  const LoadInitialData = useCallback(() =>{
-    
-    if(configurationJson && loadingState === states.LOADED){
-      setQuestion(configurationJson.flow.questions[step])
-      setLoadingState(states.INITIALIZED)
-    }
-
-  },[configurationJson])
-
-  useEffect( ()=>{
-    console.table("DYNAMIC USE EFFECT", configurationJson, step, loadingState, states)
-
-    SetData();
-
-  },[SetData])
-
-  useEffect( ()=>{
-    console.table("DYNAMIC USE EFFECT INITIAL", configurationJson, step, loadingState, states)
-
-    LoadInitialData();
-
-  },[LoadInitialData])
-
   return (
 
     <>
 
           <motion.div id="main-content"
-          key={loadingState===states.INITIALIZED ? question.label[language.name] : step}
+          key={loadingState && loadingState===states.LOADED ? data?.configurationJson.flow.questions[step]?.label[language.name] : step}
           initial="hidden"
           animate="enter"
           variants={variants}
@@ -99,11 +69,11 @@ export default function DynamicQuestion() {
             
             <div className="grid gap-8">
 
-              <Title isLoading={loadingState!==states.INITIALIZED} data={question} language={language}/>       
+              <Title isLoading={loadingState!==states.LOADED} data={data?.configurationJson.flow.questions[step]} language={language}/>       
 
               <form onSubmit={handleSubmit}>
 
-                  <TextInput isLoading={loadingState!==states.INITIALIZED} data={question} language={language}/>
+                  <TextInput isLoading={loadingState!==states.LOADED} data={data?.configurationJson.flow.questions[step]} language={language}/>
 
                   <div className="flex flex-row justify-center pt-3">
                     <ButtonSecondary text={"Atrás"} onClick={stepBack}/>
