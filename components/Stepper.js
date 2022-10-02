@@ -13,7 +13,7 @@ export function Stepper() {
     
     return (
         <>
-            <div className="md:w-[60%] w-[90%] h-fit md:self-start md:ml-[8.33%] mx-auto mb-16 ">
+            <div className="md:w-[60%] w-[90%] h-fit md:self-start md:ml-[8.33%] mx-auto mb-16 max-w-[600px]">
                 <div className="flex items-center">
                     <div className="flex items-center text-blue-600 relative">
                         <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-blue-600">

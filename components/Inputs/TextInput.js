@@ -1,9 +1,9 @@
 export default function TextInput ({questionData, language, isLoading, required = true}){
     return (
 
-        <div className={`mt-3 flex justify-center ${isLoading ? 'animate-pulse' : ''}`}>
+        <div className={`mt-3 w-full flex justify-center ${isLoading ? 'animate-pulse' : ''}`}>
             {isLoading ? 
-                <div className="bg-gray-400 m-0 leading-tight h-[3rem] md:w-[384px] w-[80vw] text-center rounded-md"/>
+                <div className="bg-gray-300 m-0 leading-tight h-[3rem] w-full text-center rounded-md"/>
             :
                 <label className="m-auto w-full h-[56px] relative block p-3 border-2 border-gray-200 rounded" htmlFor={questionData.variableName}>
                 <input

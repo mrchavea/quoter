@@ -71,11 +71,10 @@ export default function DynamicForm (){
 
                 <div className='flex md:col-start-7 md:col-span-5 w-full'>
 
-                    <form className='flex flex-wrap h-full m-auto md:w-[384px] w-[90%] content-center' onSubmit={handleSubmit}>
+                    <form className='flex flex-wrap h-full m-auto md:w-[384px] w-[90%] content-center pb-[80px]' onSubmit={handleSubmit}>
 
                         <div className="justify-center w-full">
 
-                            <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
                             <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
 
                         </div>
