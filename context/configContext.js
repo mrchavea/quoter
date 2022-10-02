@@ -18,7 +18,7 @@ const getInitialData = () => {
   console.log("SWR", data)
   return {
     data : data,
-    loadingState : !error && !data ? states.LOADING : error ? states.ERROR : states.LOADING,
+    loadingState : !error && !data ? states.LOADING : error ? states.ERROR : states.LOADED,
     error: error 
   }
 }

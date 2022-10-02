@@ -59,7 +59,7 @@ export default function DynamicForm (){
           animate="enter"
           variants={variants}
           transition={{ type: 'linear' }}
-          className="md:h-full"
+          className="md:h-full w-full"
           >
             <div className="grid md:grid-cols-12 gap-6 flex justify-center grid-rows-1 h-full">
             
