@@ -10,7 +10,7 @@ export default function Layout ( {navHeight, children}) {
       
     return (
         <>
-            <div id="Layout" className="lg:columns-12 sm:columns-4 flex flex-col md:justify-center items-center lg:pb-[10vh]">
+            <div id="Layout" className="lg:columns-12 sm:columns-4 flex flex-col md:justify-center items-center md:pb-[10vh]">
                 {children}
             </div>
             

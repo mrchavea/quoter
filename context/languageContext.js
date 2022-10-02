@@ -9,11 +9,11 @@ export const LanguageContextContextProvider = ({ children }) => {
   const LANGUAGES = [
     {
         "name" : "Español",
-        "icon" : "🏴‍☠️"
+        "icon" : "🇪🇸"
     },
     {
         "name" : "English",
-        "icon" : "🏳️‍🌈"
+        "icon" : "🇬🇧"
     }
   ]
 

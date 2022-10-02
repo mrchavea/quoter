@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Layout from '../components/Layout'
-import Stepper from "../components/Stepper";
 import Header from 'components/Header';
 
 import {StepContextContextProvider} from '../context/stepContext'

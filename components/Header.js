@@ -6,23 +6,20 @@ import {useConfigContext} from '../context/configContext'
 
 export default function Header ({height}) {
 
-    const {configurationJson} = useConfigContext();
+    const {data} = useConfigContext();
 
     return (
         <>
             <nav>           
-                {configurationJson && configurationJson.logo ?
+                {data?.configurationJson && data?.configurationJson.logo ?
                 
-                    <div id="icon">
+                    <div className="md:ml-[8.33%] ml-[5%] mt-10" id="icon">
                         <Icon height={height}/>
                     </div>
 
                 :   <div></div>
                 }
-                <section>
-                    <Stepper/>
-                </section>
-                <div>
+                <div className="">
                     <LanguageSwitch height={height}/>
                 </div>     
             </nav>
@@ -35,6 +32,7 @@ export default function Header ({height}) {
                     width: 100%;
                     display:flex;
                     text-align:center;
+                    background: ${data?.configurationJson.primaryColor}
                 }
 
                 section{
@@ -47,10 +45,6 @@ export default function Header ({height}) {
                     height:100%;
                 }
 
-                #icon{
-                    margin-top: 35px;
-                    margin-left:15px;
-                }
         `}
         </style>
         </>

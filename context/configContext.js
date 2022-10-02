@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, { useContext, createContext } from 'react';
 import useSWR from 'swr';
 
 //Context
@@ -26,11 +26,8 @@ const getInitialData = () => {
 
 //Provider
 export const ConfigContextContextProvider = ({ children }) => {
-
   const {data, loadingState} = getInitialData();
 
-
-  //
   const values = React.useMemo(() => (
     { data, loadingState, states,      // States que seran visibles en el contexto.
                                        // Funciones que son exportadas para manejo externo.

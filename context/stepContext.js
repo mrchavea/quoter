@@ -32,14 +32,11 @@ export const StepContext = createContext(null);
 export const StepContextContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const router = useRouter();
-  //const [state2, setStep2] = useState(0);
-  console.log("Probando ENV: NEXT_PUBLIC_VERCEL_URL", process.env.NEXT_PUBLIC_VERCEL_URL)
-  console.log("Probando ENV: VERCEL_URL", process.env.VERCEL_URL)
 
   //ComponentDidMouunt
   React.useEffect(() => {   
-    console.log("step en context useEffect",state)
-}, [state]);
+    //if(router.asPath !== "/precio" && state.step == 1) router.push("/precio")
+  }, [state]);
 
   //
   const values = React.useMemo(() => (
@@ -55,7 +52,6 @@ export const StepContextContextProvider = ({ children }) => {
 
 //
 export function useStepContext() {
-  console.log("DENTRO DE STEPCONTEXT")
   const context = useContext(StepContext);
 
   if(!context){

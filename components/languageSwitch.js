@@ -25,7 +25,9 @@ export function LanguageSwitch ({height}) {
                                 onClick={()=>handleClick(language)} 
                                 key={language.name}>
 
-                                    <span>{language.icon}</span>
+                                    <span className="text-3xl">
+                                        {language.icon}
+                                    </span>
 
                             </motion.a>                
                 )}
@@ -45,7 +47,6 @@ export function LanguageSwitch ({height}) {
 
             span{
                 cursor: pointer;
-                font-size: 42px;
             }
 
             `}

@@ -1,10 +1,10 @@
 export default function Title ({questionData, language, isLoading}) {
     return(
-        <div className={`${isLoading ? 'animate-pulse' : ''}`}>
+        <div className={`flex md:h-[28%] w-full md:items-end mb-2 ${isLoading ? 'animate-pulse flex justify-center' : ''}`}>
             {isLoading ? 
-                <div className="bg-gray-400 m-0 leading-tight h-[4rem] sm:w-[50vw] w-[80vw] text-center"/>
+                <div className="bg-gray-400 leading-tight h-12 md:w-full w-[80vw] rounded-md"/>
             :
-                <p className="m-0 leading-tight  md:text-[4rem] text-[2rem] text-center">
+                <p className="text-left leading-tight  md:text-[2.1rem] text-[1.8rem]">
                     {questionData?.title[language.name]}
                 </p>
             }
@@ -12,3 +12,4 @@ export default function Title ({questionData, language, isLoading}) {
 
     )
 }
+//md:mt-[-5rem]

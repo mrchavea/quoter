@@ -1,11 +1,11 @@
 export default function TextInput ({questionData, language, isLoading, required = true}){
     return (
 
-        <div className={`${isLoading ? 'animate-pulse' : ''}`}>
+        <div className={`mt-3 flex justify-center ${isLoading ? 'animate-pulse' : ''}`}>
             {isLoading ? 
-                <div className="bg-gray-400 m-0 leading-tight h-[4rem] sm:w-[50vw] w-[80vw] text-center"/>
+                <div className="bg-gray-400 m-0 leading-tight h-[3rem] md:w-[384px] w-[80vw] text-center rounded-md"/>
             :
-                <label className="relative block p-3 border-2 border-gray-200 rounded-lg" htmlFor={questionData.variableName}>
+                <label className="m-auto w-full h-[56px] relative block p-3 border-2 border-gray-200 rounded" htmlFor={questionData.variableName}>
                 <input
                     className="w-full px-0 pt-3.5 pb-0 text-sm placeholder-transparent border-none focus:ring-0 peer focus:outline-none"
                     id={questionData.variableName}
