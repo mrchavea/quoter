@@ -10,7 +10,7 @@ export default function Header ({height}) {
 
     return (
         <>
-            <nav>           
+            <nav className="h-fit mb-6 md:mb-10">           
                 {data?.configurationJson && data?.configurationJson.logo ?
                 
                     <div className="md:ml-[8.33%] ml-[5%] mt-10" id="icon">
@@ -27,8 +27,6 @@ export default function Header ({height}) {
             <style jsx>{`
 
                 nav{
-                    min-height: ${height}px;
-                    height: ${height}px;
                     width: 100%;
                     display:flex;
                     text-align:center;

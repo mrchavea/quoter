@@ -75,7 +75,18 @@ export default function DynamicForm (){
 
                         <div className="justify-center w-full">
 
+                          {step!=0 ? 
+
                             <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                          :
+                            <>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                            </>
+                            
+                          }
 
                         </div>
 
