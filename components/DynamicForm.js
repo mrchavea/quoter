@@ -61,7 +61,7 @@ export default function DynamicForm (){
           transition={{ type: 'linear' }}
           className="md:h-full w-full"
           >
-            <div className="grid md:grid-cols-12 gap-6 flex justify-center grid-rows-1 h-full">
+            <div className="md:grid md:grid-cols-12 gap-6 flex flex-wrap justify-center md:grid-rows-1 h-full">
             
                 <div className='md:col-start-2 md:col-span-5 md:w-full w-[90%] m-auto flex flex-wrap md:content-center md:h-full'>
 
