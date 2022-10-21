@@ -33,12 +33,17 @@ export const ConfigContextContextProvider = ({ children }) => {
     return null;
   }
 
+  const getHeaderData = () => {
+    if (!error && loadingState === states.LOADED) return data.configurationJson.logo;
+    return null;
+  }
+
   const values = React.useMemo(() => (
     { loadingState, states,      // States que seran visibles en el contexto.
-      getQuestion,                              // Funciones que son exportadas para manejo externo.
+      getQuestion, getHeaderData                             // Funciones que son exportadas para manejo externo.
     }), 
     [ 
-      getQuestion, loadingState, states, ]);   // States que serán visibles en el contexto.
+      getQuestion, getHeaderData, loadingState, states, ]);   // States que serán visibles en el contexto.
 
   // Interface donde será expuesto como proveedor y envolverá la App.
   return <ConfigContext.Provider value={values}>{children}</ConfigContext.Provider>;

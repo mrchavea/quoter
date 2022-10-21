@@ -6,12 +6,14 @@ import {useConfigContext} from '../context/configContext'
 
 export default function Header ({height}) {
 
-    const {data} = useConfigContext();
+    const {getHeaderData, loadingState, states} = useConfigContext();
+    const headerData = loadingState === states.LOADED ? getHeaderData() : null;
+    console.log("HEADERDATA", headerData)
 
     return (
         <>
             <nav className="h-fit mb-6 md:mb-10">           
-                {data?.configurationJson && data?.configurationJson.logo ?
+                {headerData ?
                 
                     <div className="md:ml-[8.33%] ml-[5%] mt-10" id="icon">
                         <Icon height={height}/>
@@ -30,7 +32,7 @@ export default function Header ({height}) {
                     width: 100%;
                     display:flex;
                     text-align:center;
-                    background: ${data?.configurationJson.primaryColor}
+                    background: ${headerData?.primaryColor}
                 }
 
                 section{
