@@ -26,14 +26,19 @@ const getInitialData = () => {
 
 //Provider
 export const ConfigContextContextProvider = ({ children }) => {
-  const {data, loadingState} = getInitialData();
+  const {data, loadingState, error} = getInitialData();
+
+  const getQuestion = (step) => {
+    if (!error && loadingState === states.LOADED) return data.configurationJson.flow.questions[step];
+    return null;
+  }
 
   const values = React.useMemo(() => (
-    { data, loadingState, states,      // States que seran visibles en el contexto.
-                                       // Funciones que son exportadas para manejo externo.
+    { loadingState, states,      // States que seran visibles en el contexto.
+      getQuestion,                              // Funciones que son exportadas para manejo externo.
     }), 
     [ 
-      data, loadingState, states, ]);   // States que serán visibles en el contexto.
+      getQuestion, loadingState, states, ]);   // States que serán visibles en el contexto.
 
   // Interface donde será expuesto como proveedor y envolverá la App.
   return <ConfigContext.Provider value={values}>{children}</ConfigContext.Provider>;

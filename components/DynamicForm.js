@@ -4,18 +4,16 @@ import {useConfigContext} from "../context/configContext"
 
 import {motion} from 'framer-motion'
 
-import Title from '../components/Title'
 import Button from 'components/Button';
 import ButtonSecondary from 'components/ButtonSecondary';
 import TextInput from '../components/Inputs/TextInput'
-import Helper from 'components/Helper';
 import FormCopy from './FormCopy';
+import Stepper from './Stepper';
 
-export default function DynamicForm (){
-
-    const { state : {step}, dispatch} = useStepContext();
+export default function DynamicForm ({formConfig}){
+    const {step, loadingState, states, getQuestion, stepDispatch} = formConfig;
     const {language} = useLanguageContext();
-    const {data, loadingState, states} = useConfigContext();
+    const questionData = getQuestion(formConfig.step)
 
     const variants = {
         hidden: { opacity: 0, x: -200, y: 0 },
@@ -26,7 +24,7 @@ export default function DynamicForm (){
         event.preventDefault()
         if(loadingState === states.LOADED){
           const inputData = {
-            [data.configurationJson.flow.questions[step].variableName]: event.target[data.configurationJson.flow.questions[step].variableName].value,
+            [questionData.variableName]: event.target[questionData.variableName].value,
           }
           const JSONdata = JSON.stringify(inputData)
           const response = await fetch('/api/form', {
@@ -43,18 +41,20 @@ export default function DynamicForm (){
       }
     
       const stepForward = () =>{
-        dispatch({type : 'STEP_FORWARD'})
+        stepDispatch({type : 'STEP_FORWARD'})
       }
     
       const stepBack = () =>{
-        dispatch({type : 'STEP_BACK'})
+        stepDispatch({type : 'STEP_BACK'})
       }
 
     return (
         <>
 
+          <Stepper/>
+
           <motion.div id="main-content"
-          key={loadingState && loadingState===states.LOADED && data?.configurationJson.flow.questions[step]?.label[language.name] ? data?.configurationJson.flow.questions[step]?.label[language.name] : step}
+          key={loadingState && loadingState===states.LOADED && questionData?.label[language.name] ? questionData?.label[language.name] : step}
           initial="hidden"
           animate="enter"
           variants={variants}
@@ -65,7 +65,7 @@ export default function DynamicForm (){
             
                 <div className='md:col-start-2 md:col-span-5 md:w-full w-[90%] m-auto flex flex-wrap md:content-center md:h-full'>
 
-                    <FormCopy isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                    <FormCopy isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
                 
                 </div>
 
@@ -77,13 +77,13 @@ export default function DynamicForm (){
 
                           {step!=0 ? 
 
-                            <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                            <TextInput isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
                           :
                             <>
-                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
-                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
-                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
-                              <TextInput isLoading={loadingState!==states.LOADED} questionData={data?.configurationJson.flow.questions[step]} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
+                              <TextInput isLoading={loadingState!==states.LOADED} questionData={questionData} language={language}/>
                             </>
                             
                           }
